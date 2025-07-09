@@ -1,0 +1,5 @@
+paho-mqtt==1.6.1
+typing_extensions==4.8.0
+requests==2.31.0
+pyinstaller==6.5.0
+keyboard==0.13.5
