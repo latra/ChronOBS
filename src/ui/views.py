@@ -398,7 +398,7 @@ class ObserverView(BaseView):
         self.messages_text: Optional[tk.Text] = None
         self.current_room_id: Optional[str] = None
         self.current_username: Optional[str] = None
-        keyboard.add_hotkey('alt+ctrl+t', self._on_hotkey_sync, suppress=True)
+        keyboard.add_hotkey('alt+ctrl+s', self._on_hotkey_pressed, suppress=False)
     
     def show(self) -> None:
         title_label = self.style_manager.create_label(self.parent, "Observer Mode", "title")
@@ -428,7 +428,7 @@ class ObserverView(BaseView):
             
         info_label = self.style_manager.create_label(
             self.parent, 
-            "Username: letters, numbers and hyphens only (3-20 characters)\nHotkey: Alt + Ctrl + T to sync", 
+            "Username: letters, numbers and hyphens only (3-20 characters)", 
             "normal"
         )
         info_label.pack(pady=5)
@@ -547,10 +547,10 @@ class ObserverView(BaseView):
         
         self.callbacks.on_send_time_response(response_topic, response_payload)
 
-    def _on_hotkey_sync(self) -> None:
-        if self.sync_btn and self.sync_btn["state"] != "disabled":
-            self.callbacks.on_sync_requested()
+    def _on_hotkey_pressed(self) -> None:
+        print("Alt + Ctrl + S pressed")
+        self.callbacks.on_sync_requested()
 
     def hide(self) -> None:
-        keyboard.remove_hotkey('alt+ctrl+t')
-        super().hide() 
+        keyboard.remove_hotkey('alt+ctrl+s')
+        super().hide()
